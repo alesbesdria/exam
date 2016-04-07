@@ -4,41 +4,45 @@
 int		main(int argc, char **argv)
 {
 	int	i;
-	int	j;
-//	int result;
-//	char aff;
-	j = 1;
+	int cpt;
+	char s[2];
+	
 	i = 0;
+	s[1] = '\0';
 	if (argc != 2)
-		write(1, '\n', 1);
-	while (argv[i] != '\0')
+		write(1, "\n", 1);
+	while (argv[1][i] != '\0')
 	{
-		if (&argv[i] >= 65 && &argv[i] <= 90)
+		if ((argv[1][i] >= 65) && (argv[1][i] <= 90))
 		{
 //			result = &argv[i] - 64;
 //			aff = &argv[i] * result ;
 //			write(1, aff, result);
-			while (&argv[j] != (&argv[i] - 64))
+			cpt = 0;
+			while (cpt < (argv[1][i] - 64))
 			{
-				write(1, &argv[i], 1);
-//				i++;
+				s[0] = argv[1][i];
+				write(1, s, 1);
+				cpt++;
 			}
 		}
-		if (&argv[i] >= 97 && &argv[i] <= 122)
-		{
-				while (&argv[j] != (&argv[i] - 64))
+			else if ((argv[1][i] >= 97) && (argv[1][i] <= 122))
+			{
+				cpt = 0;
+				while (cpt < (argv[1][i] - 96))
 				{
-					write(1, &argv[i], 1);
-//					i++;
+					s[0] = argv[1][i];
+					write(1, s, 1);
+					cpt++;
 				}
-		}
-		else
-		{
-			write(1, &argv[i], 1);
-//			i++;
-		}
+			}
+				else
+				{
+					s[0] = argv[1][i];
+					write(1, s, 1);
+				}
 		i++;
 	}
-	write(1, '\n', 1);
+	write(1, "\n", 1);
 	return (0);
 }
