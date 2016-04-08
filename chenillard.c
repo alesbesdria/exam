@@ -34,17 +34,22 @@ unsigned char		reverse_bits(unsigned char octet)
 	return (result);
 }
 
-void	chenillard()
+void	chenillard(unsigned char octet)
 {
 	int		cpt;
 
 	cpt = 0;
-	while (cpt < 8)
+//	octet = 0;
+	while (1)
 	{
-		octet | (1 << 7)
-		octet | (1 << 7)
-		octet | (1 << 7)
+		if (cpt == 8)
+			cpt = 0;
+		octet = octet >> 1;
+		if (cpt <= 2)
+			octet = octet | (1 << 7);
 		cpt++;
+		print_bits(octet);
+		printf("\n");
 	}
 }
 
@@ -56,7 +61,7 @@ int		main(void)
 	printf("\n");
 	print_bits(reverse_bits(83));
 	printf("\n");
-	printf(chenillard(0));
+	chenillard(0);
 	printf("\n");
 	printf("\n");
 	return (0);
