@@ -1,4 +1,5 @@
 #include <unistd.h>
+#include <stdio.h>
 
 int		ft_strlen(char *s)
 {
@@ -12,22 +13,58 @@ int		ft_strlen(char *s)
 
 int		main(int argc, char **argv)
 {
-	int		i;
+	int		av;
+	int		ar;
 	int		j;
 	short	b;
 
-	i = 0;
 	j = 1;
-	while (!((argv[j][i] <= 97 && argv[j][i] >= 122)
-			|| (argv[j][i] <= 65 && argv[j][i] >= 90)
-			|| (argv[j][i] != '\0') || (j < argc)))
+	printf("argc : %d\n", argc);
+	if (argc <= 1)
 	{
-		b = 1;
-		while ()
+		write(1, "\n", 1);
+		return (0);
+	}
+	while (j <= argc)
+	{
+		av = 0;
+		ar = ft_strlen(argv[j]) - 1;
+		while (argv[j][av] != '\0')
 		{
-		if (b == 1)
-			b = 0;
+			while (!((argv[j][ar] >= 97 && argv[j][ar] <= 122)
+					|| (argv[j][ar] >= 65 && argv[j][ar] <= 90))
+					&& (argv[j][av] != '\0') && (j <= argc))
+			{
+				ar--;
+				av++;
+			}
+			b = 1;
+			while (((argv[j][ar] >= 97 && argv[j][ar] <= 122)
+					|| (argv[j][ar] >= 65 && argv[j][ar] <= 90))
+					&& (argv[j][av] != '\0') && (j <= argc))
+			{
+				if (b == 1)
+				{
+					if (argv[j][ar] >= 97 && argv[j][ar] <= 122)
+						argv[j][ar] = argv[j][ar] - 32;
+					b = 0;
+				}
+				else if (argv[j][ar] >= 65 && argv[j][ar] <= 90)
+					argv[j][ar] = argv[j][ar] + 32;
+				av++;
+				ar--;
+			}
 		}
+		av = 0;
+		while (argv[j][av] != '\0')
+		{
+			write(1, &argv[j][av], 1);
+			av++;
+		}
+		write(1, "\n", 1);
+		j++;
+		if (j >= argc)
+			return (0);
 	}
 	return (0);
 }
