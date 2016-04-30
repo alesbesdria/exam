@@ -1,30 +1,27 @@
 #include <unistd.h>
-/*
-int		ft_atoi(int s)
-{
-	int	i;
-	int	result;
 
-	i = 0;
-	result = 0;
-	while (s[i] != '\0')
+void	ft_putchar(char c)
+{
+	write(1, &c, 1);
+}
+
+void	ft_putnbr(int nb)
+{
+	if (nb > 9)
 	{
-		result = result * 10 + s[i] - '0';
-		i++;
+		ft_putnbr(nb / 10);
+		ft_putnbr(nb % 10);
 	}
-	return (result);
-}*/
+	else
+	{
+		ft_putchar('0' + nb);
+	}
+}
 
 int		main(int argc, char **argv)
 {
-	char	result;
-	if (argc < 1)
-	{
-		write(1, "0\n", 2);
-		return (0);
-	}
-	else
-		return (argc);
-	write(1, "\n", 1);
+	(void)argv;
+	ft_putnbr(argc - 1);
+	ft_putchar('\n');
 	return (0);
 }
