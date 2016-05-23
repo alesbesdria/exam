@@ -12,11 +12,11 @@ int		ft_strlen(char *s)
 
 void	ft_swap(char *a, char *b)
 {
-	char	*c;
+	char	c[1];
 
-	c = a;
-	a = b;
-	b = c;
+	*c = *a;
+	*a = *b;
+	*b = *c;
 }
 
 char	*ft_itoa(int nb)
@@ -25,14 +25,21 @@ char	*ft_itoa(int nb)
 	int		result;
 	int		i;
 	int		j;
+	int		j2;
 	int		save;
 	int		len;
-	int bzz;
+	int		bzz;
+	int		bzz2;
 
 	i = 0;
-	j = 0;
 	save = nb;
 	s = malloc(sizeof(char) * 12);
+	if (nb < 0)
+	{
+		s[0] = '-';
+		nb = -nb;
+		i++;
+	}
 	while (nb > 0)
 	{
 		result = nb % 10;
@@ -40,34 +47,29 @@ char	*ft_itoa(int nb)
 		nb = nb / 10;
 		i++;
 	}
-	bzz = ft_strlen(s);
+	s[i] = '\0';
+	j = 0;
+	bzz = ft_strlen(s) - 1;
+	bzz2 = bzz / 2;
 	if (save >= 0)
 	{
-		while (bzz != j && j != bzz)
+		i = 0;
+		while (i <= bzz2)
 		{
-			ft_swap(&s[j], &s[bzz]);
+			ft_swap(&s[i], &s[bzz]);
 			bzz--;
-			j++;
+			i++;
 		}
 	}
 	else
 	{
-		i++;
-		s[i] = '-';
-		while (bzz != j && j != bzz)
+		i = 1;
+		while (i <= bzz2)
 		{
-			ft_swap(&s[j], &s[bzz]);
+			ft_swap(&s[i], &s[bzz]);
 			bzz--;
-			j++;
+			i++;
 		}
 	}
 	return (s);
-}
-
-int main(int argc, char **argv)
-{
-	char *res;
-	res = ft_itoa(-123456);
-	printf("%s", res);
-	return (0);
 }
